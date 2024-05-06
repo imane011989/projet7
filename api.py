@@ -10,7 +10,7 @@ import shap
 import uvicorn  # Importer uvicorn
 
 # Charger la pipeline enregistrée
-pipeline_path = "C:\\Users\\imane\\Downloads\\data_science\\Projet7\\model.pkl"
+pipeline_path = "model.pkl"
 with open(pipeline_path, 'rb') as file:
     loaded_pipeline = pickle.load(file)
 
