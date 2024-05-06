@@ -2,7 +2,7 @@
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 # More info on Python, GitHub Actions, and Azure App Service: https://aka.ms/python-webapps-actions
 
-name: Build and deploy Python app to Azure Web App - modelia
+name: Build and deploy Python app to Azure Web App - modelIA
 
 on:
   push:
@@ -20,7 +20,7 @@ jobs:
       - name: Set up Python version
         uses: actions/setup-python@v1
         with:
-          python-version: '3.12'
+          python-version: '3.11'
 
       - name: Create and start virtual environment
         run: |
@@ -65,14 +65,14 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_F47B25B7C7D644BA9338917C1F6D993C }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_FD3379DA98794D6F9BAEE91DA13FDBB3 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_7B06F062ED8D4CAD92502FDE9233102D }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_0778D0A4165540C488FD790028157487 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_95D31A99422F4B848FF828A7AE56FA4F }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_87B27639160949F4A7C265FDEE7A4907 }}
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
         with:
-          app-name: 'modelia'
+          app-name: 'modelIA'
           slot-name: 'Production'
           
