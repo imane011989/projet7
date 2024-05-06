@@ -54,7 +54,12 @@ def predict(input_data, threshold=0.55):
     prediction_proba = loaded_pipeline.predict_proba(input_df)[:, 1]
     prediction = (prediction_proba > threshold).astype(int)
     return int(input_data.get('SK_ID_CURR', -1)), int(prediction[0])
-
+    
+# Route pour la page d'accueil
+@app.get("/")
+async def root():
+    return {"message": "Welcome to your FastAPI application!"}
+    
 # Modifier la route de prédiction pour retourner SK_ID_CURR avec la prédiction
 @app.post("/predict/")
 async def get_prediction(input_data: InputData, threshold: float = 0.52):
