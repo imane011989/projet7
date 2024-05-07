@@ -1,5 +1,5 @@
 import numpy as np
-from typing import Optional
+from typing import Optional,List
 from fastapi import FastAPI
 from pydantic import BaseModel
 import imblearn
@@ -67,7 +67,7 @@ async def get_prediction(input_data: InputData, threshold: float = 0.52):
     return {"SK_ID_CURR": sk_id_curr, "prediction": prediction_result}
 
 @app.post("/predict_proba/")
-def predict_proba(input_data: list[InputData]):
+def predict_proba(input_data: List[InputData]):
     # Convertir les données d'entrée en DataFrame pandas
     input_df = pd.DataFrame([record.dict() for record in input_data])
     
@@ -87,7 +87,7 @@ def predict_proba(input_data: list[InputData]):
 
 
 @app.post("/shap/")
-def shap_analysis(input_data: list[InputData]):
+def shap_analysis(input_data: List[InputData]):
     # Convertir les données d'entrée en DataFrame pandas
     input_df = pd.DataFrame([record.dict() for record in input_data])
     
@@ -107,7 +107,7 @@ def shap_analysis(input_data: list[InputData]):
     shap_values_lists = shap_values.tolist()
     
     # Récupérer les noms de variables
-    feature_names = list(input_df.columns)
+    feature_names = List(input_df.columns)
     
     # Récupérer les identifiants SK_ID_CURR
     sk_id_curr_list = [record.SK_ID_CURR for record in input_data]
@@ -121,9 +121,7 @@ def shap_analysis(input_data: list[InputData]):
 
 # Exécuter l'application FastAPI avec uvicorn
 if __name__ == "__main__":
-<<<<<<< HEAD
+
     uvicorn.run(app, host="0.0.0.0", port=8000)
-=======
-    uvicorn.run(app, host="0.0.0.0", port=80)
->>>>>>> 4eea0dd352d13b135bdf086fc3be714f25626fb5
+
 

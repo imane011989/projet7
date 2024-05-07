@@ -6,8 +6,16 @@ name = "pypi"
 [packages]
 fastapi = "*"
 uvicorn = "*"
+numpy = "*"
+imblearn = "*"
+lightgbm = "*"
+pandas = "*"
+shap = "*"
+exceptiongroup = "*"
+scikit-learn = "*"
 
 [dev-packages]
 
 [requires]
 python_version = "3.12"
+exceptiongroup = "==1.0.0"
