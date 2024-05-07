@@ -121,5 +121,9 @@ def shap_analysis(input_data: list[InputData]):
 
 # Exécuter l'application FastAPI avec uvicorn
 if __name__ == "__main__":
+<<<<<<< HEAD
     uvicorn.run(app, host="0.0.0.0", port=8000)
+=======
+    uvicorn.run(app, host="0.0.0.0", port=80)
+>>>>>>> 4eea0dd352d13b135bdf086fc3be714f25626fb5
 
