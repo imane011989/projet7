@@ -58,9 +58,10 @@ def test_shap_analysis():
     assert "Feature Names and SHAP Values" in response.json()[0]
     assert isinstance(response.json()[0]["Feature Names and SHAP Values"], dict)
     
-    # Vérifier si les valeurs SHAP sont des listes
+    # Vérifier si les valeurs SHAP sont des listes ou des ndarray
     shap_values = response.json()[0]["Feature Names and SHAP Values"].values()
     for value in shap_values:
-        assert isinstance(value, list)
+        assert isinstance(value, list) or isinstance(value, np.ndarray)
+
 
 
