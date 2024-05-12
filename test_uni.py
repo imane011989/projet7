@@ -57,4 +57,6 @@ def test_shap_analysis():
     assert "SK_ID_CURR" in response.json()[0]
     assert "Feature Names and SHAP Values" in response.json()[0]
     assert isinstance(response.json()[0]["Feature Names and SHAP Values"], dict)
+    assert isinstance(response.json()[0]["Feature Names and SHAP Values"].values(), list)
+
 
