@@ -108,16 +108,13 @@ def shap_analysis(input_data: List[InputData]):
     sk_id_curr_list = [record.SK_ID_CURR for record in input_data]
     
     # Créer la réponse formatée
-    formatted_response = []
+    formatted_response = {"SK_ID_CURR": sk_id_curr_list, "Feature Names and SHAP Values": {}}
     for i in range(len(input_data)):
-        shap_dict = {}
-        shap_dict["SK_ID_CURR"] = sk_id_curr_list[i]
-        shap_dict["Feature Names and SHAP Values"] = {}
-        for j in range(len(feature_names)):
-            shap_dict["Feature Names and SHAP Values"][feature_names[j]] = shap_values[i][0][j]  # Correction ici
-        formatted_response.append(shap_dict)
+        for j, feature_name in enumerate(feature_names):
+            formatted_response["Feature Names and SHAP Values"].setdefault(feature_name, []).append(shap_values[i][j])
     
     return formatted_response
+
 
 
 
