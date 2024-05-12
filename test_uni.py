@@ -54,10 +54,9 @@ def test_predict_proba():
 def test_shap_analysis():
     response = client.post("/shap/", json=[test_input_data])
     assert response.status_code == 200
-    assert isinstance(response.json(), list)  # Vérifier que la réponse est une liste
-    assert len(response.json()) == 1  # Vérifier qu'il y a une seule entrée dans la liste
-    assert "SK_ID_CURR" in response.json()[0]  # Vérifier la présence de SK_ID_CURR
-    assert "Feature Names and SHAP Values" in response.json()[0]  # Vérifier la présence de Feature Names and SHAP Values
+    assert isinstance(response.json(), str)  # Vérifier que la réponse est une chaîne de caractères
+    assert "SK_ID_CURR" in response.json()  # Vérifier la présence de SK_ID_CURR
+    assert "Feature Names and SHAP Values" in response.json()  # Vérifier la présence de Feature Names and SHAP Values
 
 
 
