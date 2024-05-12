@@ -85,7 +85,6 @@ def predict_proba(input_data: List[InputData]):
     
     return formatted_response
 
-
 @app.post("/shap/")
 def shap_analysis(input_data: list[InputData]):
     # Convertir les données d'entrée en DataFrame pandas
@@ -103,8 +102,13 @@ def shap_analysis(input_data: list[InputData]):
     # Calculer les valeurs SHAP
     shap_values = explainer2.shap_values(input_df)
     
-    # Convertir les valeurs SHAP en listes
-    shap_values_lists = shap_values.tolist()
+    # Convertir les valeurs SHAP en listes si nécessaire
+    shap_values_lists = []
+    for shap_value in shap_values:
+        if isinstance(shap_value, list):
+            shap_values_lists.append(shap_value)
+        else:
+            shap_values_lists.append(shap_value.tolist())
     
     # Récupérer les noms de variables
     feature_names = list(input_df.columns)
@@ -113,9 +117,7 @@ def shap_analysis(input_data: list[InputData]):
     sk_id_curr_list = [record.SK_ID_CURR for record in input_data]
     
     # Créer la réponse formatée
-    formatted_response = f"SK_ID_CURR: {sk_id_curr_list[0]}\nFeature Names and SHAP Values:\n"
-    for name, value in zip(feature_names, shap_values_lists[0]):
-        formatted_response += f"{name}: {value}\n"
+    formatted_response = [{"SK_ID_CURR": sk_id_curr, "Feature Names and SHAP Values": dict(zip(feature_names, shap_values_list))} for sk_id_curr, shap_values_list in zip(sk_id_curr_list, shap_values_lists)]
     
     return formatted_response
 
