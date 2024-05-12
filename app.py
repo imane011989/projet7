@@ -108,14 +108,14 @@ def shap_analysis(input_data: List[InputData]):
     sk_id_curr_list = [record.SK_ID_CURR for record in input_data]
     
     # Créer la réponse formatée
-    formatted_response = {"SK_ID_CURR": sk_id_curr_list, "Feature Names and SHAP Values": {}}
+    formatted_response = []
     for i in range(len(input_data)):
+        shap_dict = {"SK_ID_CURR": sk_id_curr_list[i], "Feature Names and SHAP Values": {}}
         for j, feature_name in enumerate(feature_names):
-            formatted_response["Feature Names and SHAP Values"].setdefault(feature_name, []).append(shap_values[i][j])
+            shap_dict["Feature Names and SHAP Values"][feature_name] = shap_values[i][j]
+        formatted_response.append(shap_dict)
     
     return formatted_response
-
-
 
 
 # Exécuter l'application FastAPI avec uvicorn
