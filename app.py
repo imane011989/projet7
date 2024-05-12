@@ -102,14 +102,6 @@ def shap_analysis(input_data: List[InputData]):
     # Calculer les valeurs SHAP
     shap_values = explainer2.shap_values(input_df)
     
-    # Convertir les valeurs SHAP en listes si nécessaire
-    shap_values_lists = []
-    for shap_value in shap_values:
-        if isinstance(shap_value, list):
-            shap_values_lists.append(shap_value)
-        else:
-            shap_values_lists.append(shap_value.tolist())
-    
     # Récupérer les noms de variables
     feature_names = list(input_df.columns)
     
@@ -117,7 +109,14 @@ def shap_analysis(input_data: List[InputData]):
     sk_id_curr_list = [record.SK_ID_CURR for record in input_data]
     
     # Créer la réponse formatée
-    formatted_response = [{"SK_ID_CURR": sk_id_curr, "Feature Names and SHAP Values": dict(zip(feature_names, shap_values_list))} for sk_id_curr, shap_values_list in zip(sk_id_curr_list, shap_values_lists)]
+    formatted_response = []
+    for i in range(len(input_data)):
+        shap_dict = {}
+        shap_dict["SK_ID_CURR"] = sk_id_curr_list[i]
+        shap_dict["Feature Names and SHAP Values"] = {}
+        for j in range(len(feature_names)):
+            shap_dict["Feature Names and SHAP Values"][feature_names[j]] = shap_values[i][j]
+        formatted_response.append(shap_dict)
     
     return formatted_response
 
