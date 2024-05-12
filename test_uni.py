@@ -1,9 +1,9 @@
 
 import pytest
 from fastapi.testclient import TestClient
-import api
+import app
 
-client = TestClient(api)
+client = TestClient(app)
 
 # Test de la route "/predict/"
 def test_predict():
