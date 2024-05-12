@@ -30,7 +30,7 @@ jobs:
     - name: Run unit tests
       run: |
         pip install -r requirements.txt
-        pytest test_unit.py
+        pytest test_uni.py
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v3
