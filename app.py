@@ -84,7 +84,6 @@ def predict_proba(input_data: List[InputData]):
     formatted_response = {"SK_ID_CURR": sk_id_curr_list, "predicted_proba": predicted_proba.tolist()}
     
     return formatted_response
-
 @app.post("/shap/")
 def shap_analysis(input_data: List[InputData]):
     # Convertir les données d'entrée en DataFrame pandas
@@ -115,7 +114,7 @@ def shap_analysis(input_data: List[InputData]):
         shap_dict["SK_ID_CURR"] = sk_id_curr_list[i]
         shap_dict["Feature Names and SHAP Values"] = {}
         for j in range(len(feature_names)):
-            shap_dict["Feature Names and SHAP Values"][feature_names[j]] = shap_values[i][j]  # Correction ici
+            shap_dict["Feature Names and SHAP Values"][feature_names[j]] = shap_values[i][0][j]  # Correction ici
         formatted_response.append(shap_dict)
     
     return formatted_response
