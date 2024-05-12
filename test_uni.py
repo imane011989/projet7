@@ -1,4 +1,3 @@
-
 import pytest
 from fastapi.testclient import TestClient
 from app import app
@@ -55,5 +54,7 @@ def test_predict_proba():
 def test_shap_analysis():
     response = client.post("/shap/", json=[test_input_data])
     assert response.status_code == 200
-    assert "SK_ID_CURR" in response.text
-    assert "Feature Names and SHAP Values" in response.text
+    assert "SK_ID_CURR" in response.json()[0]
+    assert "Feature Names and SHAP Values" in response.json()[0]
+    assert isinstance(response.json()[0]["Feature Names and SHAP Values"], dict)
+
