@@ -87,7 +87,7 @@ def predict_proba(input_data: List[InputData]):
 
 
 @app.post("/shap/")
-def shap_analysis(input_data: List[InputData]):
+def shap_analysis(input_data: list[InputData]):
     # Convertir les données d'entrée en DataFrame pandas
     input_df = pd.DataFrame([record.dict() for record in input_data])
     
@@ -107,7 +107,7 @@ def shap_analysis(input_data: List[InputData]):
     shap_values_lists = shap_values.tolist()
     
     # Récupérer les noms de variables
-    feature_names = List(input_df.columns)
+    feature_names = list(input_df.columns)
     
     # Récupérer les identifiants SK_ID_CURR
     sk_id_curr_list = [record.SK_ID_CURR for record in input_data]
@@ -119,9 +119,10 @@ def shap_analysis(input_data: List[InputData]):
     
     return formatted_response
 
+
 # Exécuter l'application FastAPI avec uvicorn
 if __name__ == "__main__":
 
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host= "127.0.0.1", port=8000)
 
 
