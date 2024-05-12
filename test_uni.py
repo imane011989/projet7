@@ -105,7 +105,7 @@ def test_shap_analysis():
     # Entrée de test avec un seul enregistrement
     test_input = [
         {
-              "SK_ID_CURR": 123,
+            "SK_ID_CURR": 123,
             "DAYS_EMPLOYED": 1000,
             "DAYS_BIRTH": 12000,
             "EXT_SOURCE_3": 0.7,
@@ -130,7 +130,10 @@ def test_shap_analysis():
     ]
     response = client.post("/shap/", json=test_input)
     assert response.status_code == 200
-    data = response.text
+    data = response.json()
     # Vérifie que les valeurs SHAP sont présentes dans la réponse
     assert "SK_ID_CURR" in data
-    assert "Feature Names and SHAP Values" in data
+    assert "shap_values" in data
+    # Vérifie que les valeurs SHAP sont une liste non vide
+    assert isinstance(data["shap_values"], list)
+    assert len(data["shap_values"]) > 0
