@@ -26,6 +26,12 @@ jobs:
         username: ${{ secrets.AzureAppService_ContainerUsername_01c10b06e60e48ab8a966db13858f0bc }}
         password: ${{ secrets.AzureAppService_ContainerPassword_9d4ab9e480094dbeb04bcfd0e80215d6 }}
 
+    # Nouvelle étape pour exécuter les tests unitaires
+    - name: Run unit tests
+      run: |
+        pip install -r requirements.txt
+        pytest test_unit.py
+
     - name: Build and push container image to registry
       uses: docker/build-push-action@v3
       with:
