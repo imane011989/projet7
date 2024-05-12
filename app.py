@@ -86,7 +86,7 @@ def predict_proba(input_data: List[InputData]):
     return formatted_response
 
 @app.post("/shap/")
-def shap_analysis(input_data: list[InputData]):
+def shap_analysis(input_data: List[InputData]):
     # Convertir les données d'entrée en DataFrame pandas
     input_df = pd.DataFrame([record.dict() for record in input_data])
     
